@@ -26,7 +26,7 @@ import openerp.addons.decimal_precision as dp
 from openerp.osv import fields, osv, expression, orm
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from openerp import SUPERUSER_ID, api
+from openerp import SUPERUSER_ID
 from openerp import tools
 from openerp.tools.translate import _
 from openerp.tools.float_utils import float_round as round
@@ -37,5 +37,34 @@ from openerp.tools import (DEFAULT_SERVER_DATE_FORMAT,
 
 
 _logger = logging.getLogger(__name__)
+
+# -----------------------------------------------------------------------------
+#                                Parameters
+# -----------------------------------------------------------------------------
+
+
+
+class AuditLogon(osv.osv):
+    """ Model name: AuditLogon
+    """
+    _name = 'audit.logon'
+    _description = 'Audit logon event'
+    _order = 'timestamp'
+    
+    _columns = {
+        'name': fields.char(
+            'Login name', size=64, required=True),
+        'timestamp': fields.date('Timestamp', required=False),    
+        'type': fields.selection([
+            ('in', 'Log in'),
+            ('out', 'Log out'),
+            ], 'type', readonly=True),        
+        'metadata': fields.text('Metadata', help='Original event'),
+        }
+        
+    _defaults = {
+        # Default value:
+        'type': lambda *x: 'in',
+        }    
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
