@@ -41,9 +41,6 @@ _logger = logging.getLogger(__name__)
 # -----------------------------------------------------------------------------
 #                                Parameters
 # -----------------------------------------------------------------------------
-
-
-
 class AuditLogon(osv.osv):
     """ Model name: AuditLogon
     """
@@ -52,9 +49,19 @@ class AuditLogon(osv.osv):
     _order = 'timestamp'
     
     _columns = {
-        'name': fields.char(
-            'Login name', size=64, required=True),
+        'name': fields.char('Login name', size=64, required=True),
         'timestamp': fields.date('Timestamp', required=False),    
+        'computer': fields.char('PC name', size=64),
+        'event_category': fields.char('Category', size=64),
+        'event_id': fields.char('Event ID', size=64),
+        'event_reserved': fields.char('Event reserved', size=64),
+        'event_flags': fields.char('Event flags', size=64),
+        # SID
+        # Source name
+        # String Inserts
+        # Time generated
+        # Time written
+        
         'type': fields.selection([
             ('in', 'Log in'),
             ('out', 'Log out'),

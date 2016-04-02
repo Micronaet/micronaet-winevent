@@ -36,6 +36,8 @@ folder_id = int(config.get('ID', 'folder'))
 
 check_event_ids = (
     login_id,
+    
+    # TODO temporary disabled:
     #logout_id,
     #validate_id,
     #fs_program1_id,
