@@ -65,7 +65,7 @@ class AuditLogon(osv.osv):
         'type': fields.selection([
             ('in', 'Log in'),
             ('out', 'Log out'),
-            ], 'type', readonly=True),        
+            ], 'Type', readonly=True),        
         'metadata': fields.text('Metadata', help='Original event'),
         }
         

@@ -5,13 +5,12 @@
             <field name="name">audit.logon.search</field>
             <field name="model">audit.logon</field>
             <field name="arch" type="xml">
-                <search string="Audit" version="7.0">        
-                   <search string="Audit">                       
-                        <field name="partner_id"/>
-                        <group expand="0" string="Group By">
-                            <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
-                        </group>                
-                   </search>
+                <search string="Audit" version="7.0">
+                    <field name="name" />
+                    <group expand="0" string="Group By">
+                        <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
+                    </group>                
+                </search>
             </field>
         </record>
         
@@ -58,7 +57,7 @@
             <field name="res_model">audit.logon</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_audit_logon_form"/>
+            <field name="view_id" ref="view_audit_logon_tree"/>
             <field name="context">{}</field>
             <field name="domain">[]</field>
         </record>
@@ -66,19 +65,19 @@
         <menuitem 
             id="menu_root_audit"
             string="Audit"
+            name="Audit"
             sequence="80"
             />
             <menuitem 
                 parent="menu_root_audit" 
                 id="menu_audit_log" 
-                string="Audit log"
+                name="Audit log"
                 sequence="10"
                 />            
                 <menuitem 
                     parent="menu_audit_log" 
                     id="menu_audit_logon" 
                     action="action_audit_logon"
-                    string="Logon events"
                     sequence="10"
                     />
         
