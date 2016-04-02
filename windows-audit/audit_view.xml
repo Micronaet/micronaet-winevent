@@ -1,7 +1,88 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-
+        <record model="ir.ui.view" id="view_audit_logon_search">
+            <field name="name">audit.logon.search</field>
+            <field name="model">audit.logon</field>
+            <field name="arch" type="xml">
+                <search string="Audit" version="7.0">        
+                   <search string="Audit">                       
+                        <field name="partner_id"/>
+                        <group expand="0" string="Group By">
+                            <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
+                        </group>                
+                   </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_audit_logon_tree">
+            <field name="name">audit.logon.tree</field>
+            <field name="model">audit.logon</field>
+            <field name="arch" type="xml">
+                <tree string="Audit">
+                    <field name="name" />
+                    <field name="timestamp" />
+                    <field name="computer" />
+                    <field name="event_category" />
+                    <field name="event_id" />
+                    <field name="event_reserved" />
+                    <field name="event_flags" />
+                    <field name="type" />
+                    <field name="metadata" />
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_audit_logon_form">
+            <field name="name">audit.logon.tree</field>
+            <field name="model">audit.logon</field>
+            <field name="arch" type="xml">
+                <form string="Audit" version="7.0">
+                    <sheet>
+                        <field name="name" />
+                        <field name="timestamp" />
+                        <field name="computer" />
+                        <field name="event_category" />
+                        <field name="event_id" />
+                        <field name="event_reserved" />
+                        <field name="event_flags" />
+                        <field name="type" />
+                        <field name="metadata" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_audit_logon">
+            <field name="name">Audit logon</field>
+            <field name="res_model">audit.logon</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_audit_logon_form"/>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+        </record>
+        
+        <menuitem 
+            id="menu_root_audit"
+            string="Audit"
+            sequence="80"
+            />
+            <menuitem 
+                parent="menu_root_audit" 
+                id="menu_audit_log" 
+                string="Audit log"
+                sequence="10"
+                />            
+                <menuitem 
+                    parent="menu_audit_log" 
+                    id="menu_audit_logon" 
+                    action="action_audit_logon"
+                    string="Logon events"
+                    sequence="10"
+                    />
+        
+        
     </data>
 </openerp>
 
