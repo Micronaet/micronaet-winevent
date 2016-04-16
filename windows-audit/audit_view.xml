@@ -1,6 +1,82 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <!--audit.fileaccess-->
+        <record model="ir.ui.view" id="view_audit_fileaccess_search">
+            <field name="name">audit.fileaccess.search</field>
+            <field name="model">audit.fileaccess</field>
+            <field name="arch" type="xml">
+                <search string="Audit" version="7.0">
+                    <field name="name" />
+                    <group expand="0" string="Group By">
+                        <filter name="group_name" string="name" context="{'group_by': 'name'}"/>
+                    </group>                
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_audit_fileaccess_tree">
+            <field name="name">audit.fileaccess.tree</field>
+            <field name="model">audit.fileaccess</field>
+            <field name="arch" type="xml">
+                <tree string="Audit">
+                    <field name="name" />
+                    <field name="timestamp" />
+                    <field name="computer" />
+                    <field name="filename" />
+                    <!--<field name="metadata" />-->
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_audit_fileaccess_form">
+            <field name="name">audit.fileaccess.tree</field>
+            <field name="model">audit.fileaccess</field>
+            <field name="arch" type="xml">
+                <form string="Audit" version="7.0">
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <field name="name" />
+                            <field name="timestamp" />
+                            <field name="computer" />
+                            <field name="filename" />
+                            <field name="metadata" />
+                        </group>    
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_audit_fileaccess">
+            <field name="name">Audit fileaccess</field>
+            <field name="res_model">audit.fileaccess</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_audit_fileaccess_tree"/>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+        </record>
+        
+        <menuitem 
+            id="menu_root_audit"
+            string="Audit"
+            name="Audit"
+            sequence="80"
+            />
+            <menuitem 
+                parent="menu_root_audit" 
+                id="menu_audit_log" 
+                name="Audit log"
+                sequence="10"
+                />            
+                <menuitem 
+                    parent="menu_audit_log" 
+                    id="menu_audit_fileaccess" 
+                    action="action_audit_fileaccess"
+                    sequence="10"
+                    />
+        
+        <!--audit.logon-->
         <record model="ir.ui.view" id="view_audit_logon_search">
             <field name="name">audit.logon.search</field>
             <field name="model">audit.logon</field>
@@ -38,15 +114,17 @@
             <field name="arch" type="xml">
                 <form string="Audit" version="7.0">
                     <sheet>
-                        <field name="name" />
-                        <field name="timestamp" />
-                        <field name="computer" />
-                        <field name="event_category" />
-                        <field name="event_id" />
-                        <field name="event_reserved" />
-                        <field name="event_flags" />
-                        <field name="type" />
-                        <field name="metadata" />
+                        <group colspan="4" col="4">
+                            <field name="name" />
+                            <field name="timestamp" />
+                            <field name="computer" />
+                            <field name="event_category" />
+                            <field name="event_id" />
+                            <field name="event_reserved" />
+                            <field name="event_flags" />
+                            <field name="type" />
+                            <field name="metadata" />
+                        </group>    
                     </sheet>
                 </form>
             </field>
@@ -62,18 +140,6 @@
             <field name="domain">[]</field>
         </record>
         
-        <menuitem 
-            id="menu_root_audit"
-            string="Audit"
-            name="Audit"
-            sequence="80"
-            />
-            <menuitem 
-                parent="menu_root_audit" 
-                id="menu_audit_log" 
-                name="Audit log"
-                sequence="10"
-                />            
                 <menuitem 
                     parent="menu_audit_log" 
                     id="menu_audit_logon" 
