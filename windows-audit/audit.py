@@ -48,6 +48,12 @@ class AuditLogon(osv.osv):
     _description = 'Audit logon event'
     _order = 'timestamp'
     
+    def get_last_timestamp(self, cr, uid, context=None):
+        ''' Return last time stamp date 
+            used to append from that value (called from XMLRPC)
+        '''
+        return False
+    
     _columns = {
         'name': fields.char('Login name', size=64, required=True),
         'timestamp': fields.date('Timestamp', required=False),    
@@ -74,4 +80,27 @@ class AuditLogon(osv.osv):
         'type': lambda *x: 'in',
         }    
 
+class AuditFileaccess(osv.osv):
+    """ Model name: Audit Access to file
+    """
+    _name = 'audit.fileaccess'
+    _description = 'Audit file access event'
+    _order = 'timestamp'
+    
+    def get_last_timestamp(self, cr, uid, context=None):
+        ''' Return last time stamp date 
+            used to append from that value (called from XMLRPC)
+        '''
+        return False
+    
+    _columns = {
+        'name': fields.char('Login name', size=64, required=True),
+        'timestamp': fields.date('Timestamp', required=False),    
+        'computer': fields.char('PC name', size=64),
+        'filename': fields.char('File', size=200),        
+        'metadata': fields.text('Metadata', help='Original event'),
+        }
+        
+    _defaults = {
+        }    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
