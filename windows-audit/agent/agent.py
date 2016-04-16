@@ -1,18 +1,49 @@
 import win32evtlog
-from datetime import datetime
 import xmlrpclib
+import ConfigParser
+
+from datetime import datetime
+
+# Config file:
+#cfg_file = os.path.join(
+#    os.path.dirname(os.path.abspath(__file__)),
+#    'openerp.cfg', 
+#    )
+cfg_file = 'openerp.cfg'
+config = ConfigParser.ConfigParser()
+config.read([cfg_file])
 
 # Windows parameter:
-server = 'localhost' # name of the target computer to get event logs
-logtype = 'Security' # System
-log_file = 'c:\etl\log.security.%s.txt' % datetime.now().strftime('%Y_%m_%d_%H_%S')
+server = config.get('windows', 'server') # localhost
+logtype = config.get('windows', 'registry') #'Security' 
 
 # OpenERP parameter:
-rpc_server = '192.168.1.9'
-rpc_port = '8069'
-rpc_username = 'admin'
-rpc_password = 'Micronaet'
-rpc_db = 'Micronaet'
+rpc_server = config.get('openerp', 'server') # 192.168.1.9
+rpc_port = config.get('openerp', 'port')
+rpc_username = config.get('openerp', 'user')
+rpc_password = config.get('openerp', 'pwd')
+rpc_db = config.get('openerp', 'dbname')
+
+# Event ID:
+#login_id = int(config.get('ID', 'login'))
+#logout_id = int(config.get('ID', 'logout'))
+#validate_id = int(config.get('ID', 'validate'))
+#fs_program1_id = int(config.get('ID', 'fs_program1'))
+#fs_program2_id = int(config.get('ID', 'fs_program2'))
+#folder_id = int(config.get('ID', 'folder'))
+#check_event_ids = (
+#    login_id,
+#    # TODO temporary disabled:
+#    #logout_id,
+#    #validate_id,
+#    #fs_program1_id,
+#    #fs_program2_id,
+#    #folder_id,
+#    )
+
+
+log_file = 'c:\etl\log.security.%s.txt' % datetime.now().strftime(
+    '%Y_%m_%d_%H_%S')
 
 # Set up elements:
 f_log = open(log_file, 'a')
