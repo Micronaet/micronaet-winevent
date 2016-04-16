@@ -35,6 +35,7 @@
     'init_xml': [],
     'demo': [],
     'data': [
+        'security/audit_groups.xml',
         #'security/ir.model.access.csv',    
         'audit_view.xml',
         ],

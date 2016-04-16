@@ -62,6 +62,7 @@
             string="Audit"
             name="Audit"
             sequence="80"
+            groups="res_groups_audit_admin"
             />
             <menuitem 
                 parent="menu_root_audit" 
