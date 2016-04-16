@@ -139,13 +139,12 @@
             <field name="view_id" ref="view_audit_logon_tree"/>
             <field name="context">{}</field>
             <field name="domain">[]</field>
-        </record>
-        
+        </record>        
                 <menuitem 
                     parent="menu_audit_log" 
                     id="menu_audit_logon" 
                     action="action_audit_logon"
-                    sequence="10"
+                    sequence="20"
                     />
         
         
