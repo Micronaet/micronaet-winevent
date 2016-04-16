@@ -95,7 +95,7 @@ class AuditFileaccess(osv.osv):
     
     _columns = {
         'name': fields.char('Login name', size=64, required=True),
-        'timestamp': fields.date('Timestamp', required=False),    
+        'timestamp': fields.datetime('Timestamp', required=False),    
         'computer': fields.char('PC name', size=64),
         'filename': fields.char('File', size=200),        
         'metadata': fields.text('Metadata', help='Original event'),
